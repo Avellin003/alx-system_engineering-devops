@@ -1,2 +1,2 @@
 #!/bin/bash
-less -n 3 iacta
+sort -n 3 iacta|cat
