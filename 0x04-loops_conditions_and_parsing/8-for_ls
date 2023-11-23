@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# mimics ls
+for i in $(echo ./*); do
+	echo "$i" | cut -d '-' -f 2 | cut -d '/' -f 2
+done
