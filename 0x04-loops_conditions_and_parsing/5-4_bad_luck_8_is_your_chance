@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # Prints bad luck on the 8 and 4 loop
-i=0
-while [ $i -lt 10 ]; do
-	echo "Best School"
-	((i++))
-	if ((i == 4)); then
+i=1
+while ((i <= 10)); do
+	if ((i == 8)); then
+		echo "good luck"
+	elif ((i == 4)); then
 		echo "bad luck"
-	elif ((i == 8)); then
-		echo "bad luck"
+	else
+		echo "Best School"
 	fi
+	((i++))
 done
