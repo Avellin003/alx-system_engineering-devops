@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Prints bad luck on the 8 and 4 loop
+i=0
+while [ $i -lt 10 ]; do
+	echo "Best School"
+	((i++))
+	if ((i == 4)); then
+		echo "bad luck"
+	elif ((i == 8)); then
+		echo "bad luck"
+	fi
+done
