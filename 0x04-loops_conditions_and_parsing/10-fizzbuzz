@@ -5,9 +5,9 @@ for a in {1..100}; do
 	buzz=$((a % 5))
 	if [ "$fizz" -eq 0 ] && [ "$buzz" -eq 0 ]; then
 		echo "FizzBuzz"
-	elif [ "$fizz" ]; then
+	elif [ "$fizz" -eq 0 ]; then
 		echo "Fizz"
-	elif [ "$buzz" ]; then
+	elif [ "$buzz" -eq 0 ]; then
 		echo "Buzz"
 	else
 		echo "$a"
