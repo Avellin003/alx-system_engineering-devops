@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Command to echo "To infinity and beyond"
+echo $$ | sudo tee /var/run/myscript.pid >/dev/null
+
+# Function to clean up and exit
+cleanup_and_exit() {
+    echo "I hate the kill command"
+    sudo rm /var/run/myscript.pid
+    exit
+}
+
+# Set up traps for signals
+trap 'cleanup_and_exit' SIGTERM
+trap 'echo "Y u no love me?!"' SIGINT
+trap 'cleanup_and_exit' SIGQUIT
+
+# Infinite loop
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
