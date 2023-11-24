@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# usage of upkill
+pkill -f 7-highlander -9
