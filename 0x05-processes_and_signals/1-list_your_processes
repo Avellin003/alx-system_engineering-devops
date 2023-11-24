@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# displays infos in a tree like
+ps auxf
