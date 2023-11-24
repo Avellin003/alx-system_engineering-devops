@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This line specifies the path to the Bash interpreter.
+
+# Get the process ID (PID) of the process that matches the command line pattern
+pg=$(pgrep -f 4-to_infinity_and_beyond)
+
+# Send a SIGKILL signal (-9) to terminate the process
+kill -9 "$pg"
