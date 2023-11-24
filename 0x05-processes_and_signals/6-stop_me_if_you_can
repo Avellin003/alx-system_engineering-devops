@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This line specifies the path to the Bash interpreter.
+
+# Use pkill to terminate process
+pkill -f 4-to_infinity_and_beyond
