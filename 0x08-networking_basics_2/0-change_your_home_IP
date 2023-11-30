@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#config of ubuntu server
+#creation of a temporary hosts file
+host="/temp/hosts.new"
+sudo cp /etc/hosts "$host"
+echo -e '127.0.0.2\tlocalhost' | sudo tee "$host" > /dev/null
+echo -e '8.8.8.8\tfacebook.com' | sudo tee -a "$host" > /dev/null
+#overwriting the original host file with modified temp one
+sudo cp "$host" /etc/hosts
+#cleaning up the temporary file
+rm "$host"
