@@ -1,5 +1,6 @@
-#install flask
+#installing flask
 
-exec { 'install_flask':
-  command => 'pkill killmenow',
+package {'install-flask':
+  ensure   => '2.1.0',
+  provider => 'pip3'
 }
