@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#creation of ssh keys using bash scripting
+path="~/.ssh/school"
+user="ubuntu"
+ssh -i $path $user@localhost
