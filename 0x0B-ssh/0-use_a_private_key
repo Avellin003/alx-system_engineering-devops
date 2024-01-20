@@ -2,4 +2,4 @@
 #creation of ssh keys using bash scripting
 path="~/.ssh/school"
 user="ubuntu"
-ssh -i $path $user@localhost
+ssh -i $path $user@16.180.125.234
