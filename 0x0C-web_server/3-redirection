@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# install nginx
+sudo apt update
+sudo apt -y install nginx
+sudo chown -R "$USER":"$USER" /var/www/html
+echo 'Hello World!' > /var/www/html/index.html
+new_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
+sudo sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-available/default
+sudo chown -R root:root /var/www/html
+sudo service nginx restart
