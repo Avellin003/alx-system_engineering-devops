@@ -19,10 +19,10 @@ echo "Hello World!" > /var/www/html/index.html
 #addition of the response to the header
 search='server_name _;'
 reply="a \\\\\\\\ add_header X-served-By \$hostname;"
-sudo sed -i "/$search/$repl" /etc/nginx/sites-available/default
+sudo sed -i "/$search/$reply" /etc/nginx/sites-available/default
 #redirections
 reply="a \ \ \ \ \ \ \ \ location /redirect_me {return 301 https://youtube.com;}"
-sudo sed -i "/$search/$repl" /etc/nginx/sites-available/default
+sudo sed -i "/$search/$reply" /etc/nginx/sites-available/default
 #creation of redirection configuration
 reply="a \ \ \ \ \ \ \ \ error_page 404 /404.html;"
 echo "Ceci n'est pas une page" > /var/www/html/404.html
