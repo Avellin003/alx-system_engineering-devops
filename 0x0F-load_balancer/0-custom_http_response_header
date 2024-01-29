@@ -18,7 +18,7 @@ sudo chown -R "$USER":"$USER" /var/www/html
 echo "Hello World!" > /var/www/html/index.html
 #addition of the response to the header
 search='server_name _;'
-reply="a \\\\\\\\ add_header X-served-By \$hostname;"
+reply="a \ \ \ \ \ \ \ \ add_header X-served-By \$hostname;"
 sudo sed -i "/$search/$reply" /etc/nginx/sites-available/default
 #redirections
 reply="a \ \ \ \ \ \ \ \ location /redirect_me {return 301 https://youtube.com;}"
