@@ -1,25 +1,46 @@
-#installation of the nginx
-exec {'updating':
-  provider => shell,
+# Update package repositories
+exec { 'updating':
   command  => 'sudo apt-get -y update',
-  before   => Exec['install Nginx'],
 }
 
-exec {'Nginx installation':
-  provider => shell,
-  command  => 'sudo apt-get -y install nginx',
-  before   => Exec['add_header'],
+# Check if Nginx is installed
+exec { 'check_nginx_installed':
+  command     => 'dpkg -l | grep nginx',
+  path        => ['/bin', '/usr/bin'],
+  refreshonly => true,
+  notify      => Package['nginx'],
 }
 
-exec { 'header':
-  provider    => shell,
-  environment => ["HOST=${hostname}"],
-  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOST\";
-/" /etc/nginx/nginx.conf',
-  before      => Exec['restart Nginx'],
+# Install Nginx
+package { 'nginx':
+  ensure  => installed,
+  require => Exec['updating'],
 }
 
-exec { 'restart':
-  provider => shell,
-  command  => 'sudo service nginx restart',
+# Modify Nginx configuration file
+file { '/etc/nginx/nginx.conf':
+  ensure  => present,
+  content => template('your_module/nginx.conf.erb'), # Create a template with the desired content
+  notify  => Service['nginx'],
+}
+
+# Add a custom header to Nginx configuration
+file_line { 'add_custom_header':
+  path    => '/etc/nginx/nginx.conf',
+  line    => 'add_header X-Served-By "${hostname}";',
+  require => File['/etc/nginx/nginx.conf'],
+}
+
+# Ensure Nginx service is running and enabled
+service { 'nginx':
+  ensure    => running,
+  enable    => true,
+  subscribe => File['/etc/nginx/nginx.conf'],
+}
+
+# Restart Nginx if configuration changes
+exec { 'restart_nginx':
+  command     => 'sudo service nginx restart',
+  refreshonly => true,
+  subscribe   => File['/etc/nginx/nginx.conf'],
 }
