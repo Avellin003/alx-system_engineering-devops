@@ -3,7 +3,7 @@
 function ddomain {
 	dnames=("www" "lb-01" "web-01" "we-b02")
 
-	for a in "${dnmaes[@]}";
+	for a in "${dnames[@]}";
 	do
 		dig "${a}"."$a" | grep -A1 'ANSWER SECTION:' | \
 		awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' \
@@ -12,7 +12,7 @@ function ddomain {
 }
 function subdom {
 	dig "${2}"."$1" | grep -A1 'ANSWER SECTION:' | \
-	AWK 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' VAR="$2"
+	awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' VAR="$2"
 }
 if [ $# -lt 1 ]
 then
