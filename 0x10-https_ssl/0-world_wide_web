@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#This will display info on subdomains
+function ddomain {
+	dnames=("www" "lb-01" "web-01" "we-b02")
+
+	for a in "${dnmaes[@]}";
+	do
+		dig "${a}"."$a" | grep -A1 'ANSWER SECTION:' | \
+		awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' \
+		var="$a"
+	done
+}
+function subdom {
+	dig "${2}"."$1" | grep -A1 'ANSWER SECTION:' | \
+	AWK 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' VAR="$2"
+}
+if [ $# -lt 1 ]
+then
+	echo "*** Provide domain name ***"
+elif [ $# -eq 1 ]
+then
+	ddomain "$1";
+else
+	subdom "$1" "$2";
+fi
