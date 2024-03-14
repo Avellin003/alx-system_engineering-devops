@@ -1,12 +1,14 @@
-#web_stack-debugging_4
+# file to replace
 
-exec {'repl':
-  provider => shell,
-  command  => 'sudo sed -i "s/ULIMIT=\"-n 15\"/ULIMIT=\"-n 4096\"/" /etc/default/nginx',
-  before   => Exec['restart'],
+exec {'replace':
+  command  =>  'sed -i "s/^ULIMIT.*/ULIMIT=\"-n 2048\"/" /etc/default/nginx',
+  path     =>  '/bin',
+  provider =>   'shell'
 }
 
-exec {'re-tart':
-  provider => shell,
-  command  => 'sudo service nginx restart',
+#restarting the nginx
+exec {'restart':
+  command =>  'nginx restart',
+  path    =>  '/etc/init.d',
+  require =>  Exec['fix--for-nginx']
 }
